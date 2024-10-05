@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System;
+using UnityEditor;
 public class GameManager : MonoBehaviour
 {
     public List<GameObject> target;
@@ -13,6 +14,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI gameOverText;
     public GameObject titleScreen;
     public Button restartGame;
+    public Button exitGame;
     private int score = 0;
     private int health = 3;
     private float spawnRate;
@@ -71,6 +73,7 @@ public class GameManager : MonoBehaviour
         gameOver = true;
         gameOverText.gameObject.SetActive(true);
         restartGame.gameObject.SetActive(true);
+        exitGame.gameObject.SetActive(true);
     }
     public void RestartGame()
     {
@@ -146,6 +149,8 @@ public class GameManager : MonoBehaviour
         if (health == 3)
         {
             health3.gameObject.SetActive(true);
+            health2.gameObject.SetActive(true);
+            health1.gameObject.SetActive(true);
         }
         else if (health == 2)
         {
@@ -160,5 +165,13 @@ public class GameManager : MonoBehaviour
         {
             IncreaseHealth();
         }
+    }
+    public void ExitGame()
+    {
+        #if UNITY_EDITOR
+        EditorApplication.ExitPlaymode();
+        #else
+        Application.Quit();
+        #endif
     }
 }

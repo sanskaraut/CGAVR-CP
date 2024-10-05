@@ -8,7 +8,7 @@ public class Target : MonoBehaviour
     private Rigidbody targetRb;
     private int minForce = 12;
     private int maxForce = 17;
-    private int maxTorque = 10;
+    private int maxTorque = 6;
     private int xRange = 4;
     private float yRange = -2.5f;
     public bool reduceHealth;
