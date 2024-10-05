@@ -8,13 +8,15 @@ using System;
 public class GameManager : MonoBehaviour
 {
     public List<GameObject> target;
+    public List<GameObject> powerUp;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI gameOverText;
     public GameObject titleScreen;
     public Button restartGame;
     private int score = 0;
-    public int health = 3;
-    public float spawnRate = 3;
+    private int health = 3;
+    private float spawnRate;
+    public int powerUpSpawnTime;
     public bool gameOver;
     public GameObject health1;
     public GameObject health2;
@@ -41,8 +43,21 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(spawnRate);
             int index = UnityEngine.Random.Range(0, target.Count);
             Instantiate(target[index]);
-
         }
+    }
+    IEnumerator SpawnPowerUp()
+    {
+        while (gameOver == false)
+        {
+            yield return new WaitForSeconds(powerUpSpawnTime);
+            int decisionSpawnPowerUp = UnityEngine.Random.Range(0, 11);
+            if (decisionSpawnPowerUp == 10)
+            {
+                int index1 = UnityEngine.Random.Range(0, powerUp.Count);
+                Instantiate(powerUp[index1]);
+            }
+        }
+
     }
 
     public void UpdateScore(int scoreToAdd)
@@ -63,13 +78,27 @@ public class GameManager : MonoBehaviour
     }
     public void StartGame(int difficulty)
     {
+        powerUpSpawnTime = difficulty + 2;
         scoreText.gameObject.SetActive(true);
         titleScreen.gameObject.SetActive(false);
         gameOver = false;
         score = 0;
-        spawnRate /= difficulty;
+        if (difficulty == 1)
+        {
+            spawnRate = 1;
+        }
+        else if (difficulty == 2)
+        {
+            spawnRate = 0.85f;
+        }
+        else if (difficulty == 3)
+        {
+            spawnRate = 0.7f;
+        }
         StartCoroutine(SpawnTarget());
+        StartCoroutine(SpawnPowerUp());
         UpdateScore(0);
+        UpdateHealth();
     }
     public void ReduceHealth()
     {
@@ -79,30 +108,52 @@ public class GameManager : MonoBehaviour
         {
             GameOver();
         }
-        
+
 
     }
     public void IncreaseHealth()
     {
         health++;
+        UpdateHealth();
+        Debug.Log("Health Added");
     }
     private void UpdateHealth()
     {
-        if(health == 2)
+        if (health == 3)
         {
+            health1.gameObject.SetActive(true);
+            health2.gameObject.SetActive(true);
+            health3.gameObject.SetActive(true);
+        }
+        else if (health == 2)
+        {
+            health1.gameObject.SetActive(true);
+            health2.gameObject.SetActive(true);
             health3.gameObject.SetActive(false);
             healthParticle3.Play();
         }
-        if(health == 1)
+        else if (health == 1)
         {
+            health1.gameObject.SetActive(true);
             health2.gameObject.SetActive(false);
+            health3.gameObject.SetActive(false);
             healthParticle2.Play();
         }
-        if(health == 0)
+        else if (health == 0)
         {
+            health1.gameObject.SetActive(false);
+            health1.gameObject.SetActive(false);
             health1.gameObject.SetActive(false);
             healthParticle1.Play();
         }
-        
+
+    }
+    public void AddPowerUpEffect(string powerUpCode)
+    {
+        Debug.Log(powerUpCode);
+        if (powerUpCode == "Health Kit")
+        {
+            IncreaseHealth();
+        }
     }
 }

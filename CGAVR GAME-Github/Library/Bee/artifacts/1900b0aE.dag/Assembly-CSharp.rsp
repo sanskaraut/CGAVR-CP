@@ -356,8 +356,8 @@
 "Assets/Course Library/_Source_Files/Scripts/DestroyAfterDelay.cs"
 "Assets/Scripts/ButtonController.cs"
 "Assets/Scripts/GameManager.cs"
+"Assets/Scripts/PowerUp.cs"
 "Assets/Scripts/Target.cs"
-"Assets/Scripts/TIMEPASS.cs"
 -langversion:9.0
 /deterministic
 /optimize+

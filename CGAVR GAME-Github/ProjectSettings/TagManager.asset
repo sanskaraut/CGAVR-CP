@@ -7,6 +7,7 @@ TagManager:
   - Bad
   - Good
   - Sensor
+  - Power Up
   layers:
   - Default
   - TransparentFX
