@@ -11,6 +11,7 @@ public class Target : MonoBehaviour
     private int maxTorque = 10;
     private int xRange = 4;
     private int yRange = -2;
+    public bool reduceHealth;
     private GameManager gameManager;
     public int pointValue;
     public ParticleSystem explosionParticle;
@@ -43,6 +44,11 @@ public class Target : MonoBehaviour
             Destroy(gameObject);
             Instantiate(explosionParticle, transform.position, explosionParticle.transform.rotation);
             gameManager.UpdateScore(pointValue);
+            if (reduceHealth)
+            {
+                gameManager.ReduceHealth();
+            }
+
         }
     }
     void OnTriggerEnter(Collider other)
@@ -50,10 +56,6 @@ public class Target : MonoBehaviour
         if (other.CompareTag("Sensor"))
         {
             Destroy(gameObject);
-        }
-        if (other.gameObject.CompareTag("Sensor") && gameObject.CompareTag("Good"))
-        {
-            gameManager.GameOver();
         }
     }
 }
