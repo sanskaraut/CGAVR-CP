@@ -95,15 +95,15 @@ public class GameManager : MonoBehaviour
         {
             spawnRate = 0.7f;
         }
+        UpdateIncreaseHealth();
+        UpdateScore(0);
         StartCoroutine(SpawnTarget());
         StartCoroutine(SpawnPowerUp());
-        UpdateScore(0);
-        UpdateHealth();
     }
     public void ReduceHealth()
     {
         health--;
-        UpdateHealth();
+        UpdateDecreaseHealth();
         if (health == 0)
         {
             GameOver();
@@ -114,10 +114,10 @@ public class GameManager : MonoBehaviour
     public void IncreaseHealth()
     {
         health++;
-        UpdateHealth();
+        UpdateIncreaseHealth();
         Debug.Log("Health Added");
     }
-    private void UpdateHealth()
+    private void UpdateDecreaseHealth()
     {
         if (health == 3)
         {
@@ -127,31 +127,36 @@ public class GameManager : MonoBehaviour
         }
         else if (health == 2)
         {
-            health1.gameObject.SetActive(true);
-            health2.gameObject.SetActive(true);
             health3.gameObject.SetActive(false);
             healthParticle3.Play();
         }
         else if (health == 1)
         {
-            health1.gameObject.SetActive(true);
             health2.gameObject.SetActive(false);
-            health3.gameObject.SetActive(false);
             healthParticle2.Play();
         }
         else if (health == 0)
         {
             health1.gameObject.SetActive(false);
-            health1.gameObject.SetActive(false);
-            health1.gameObject.SetActive(false);
             healthParticle1.Play();
+        }
+    }
+    private void UpdateIncreaseHealth()
+    {
+        if (health == 3)
+        {
+            health3.gameObject.SetActive(true);
+        }
+        else if (health == 2)
+        {
+            health2.gameObject.SetActive(true);
         }
 
     }
-    public void AddPowerUpEffect(string powerUpCode)
+    public void AddPowerUpEffect(string powerUpCategory)
     {
-        Debug.Log(powerUpCode);
-        if (powerUpCode == "Health Kit")
+        Debug.Log(powerUpCategory);
+        if (powerUpCategory == "Health Kit")
         {
             IncreaseHealth();
         }

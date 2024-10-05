@@ -10,10 +10,10 @@ public class PowerUp : MonoBehaviour
     private int maxForce = 17;
     private int maxTorque = 10;
     private int xRange = 4;
-    private int yRange = -2;
+    private float yRange = -2.5f;
     public bool reduceHealth;
     private GameManager gameManager;
-    public string powerUpCode;
+    public string powerUpCategory;
     public ParticleSystem explosionParticle;
     // Start is called before the first frame update
     void Start()
@@ -45,7 +45,7 @@ public class PowerUp : MonoBehaviour
             Instantiate(explosionParticle, transform.position, explosionParticle.transform.rotation);
             if(gameObject.CompareTag("Power Up"))
             {
-                gameManager.AddPowerUpEffect(powerUpCode);
+                gameManager.AddPowerUpEffect(powerUpCategory);
             }
         }
     }
