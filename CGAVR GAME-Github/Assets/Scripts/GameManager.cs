@@ -53,8 +53,9 @@ public class GameManager : MonoBehaviour
         {
             yield return new WaitForSeconds(powerUpSpawnTime);
             int decisionSpawnPowerUp = UnityEngine.Random.Range(0, 11);
-            if (decisionSpawnPowerUp == 10)
+            if (decisionSpawnPowerUp == 10 || decisionSpawnPowerUp == 7)
             {
+                Debug.Log("PowerUp Spawned");
                 int index1 = UnityEngine.Random.Range(0, powerUp.Count);
                 Instantiate(powerUp[index1]);
             }
@@ -116,9 +117,12 @@ public class GameManager : MonoBehaviour
     }
     public void IncreaseHealth()
     {
-        health++;
-        UpdateIncreaseHealth();
+        if (health < 3)
+        {
+            health++;
         Debug.Log("Health Added");
+        UpdateIncreaseHealth();
+        }
     }
     private void UpdateDecreaseHealth()
     {
@@ -155,6 +159,7 @@ public class GameManager : MonoBehaviour
         else if (health == 2)
         {
             health2.gameObject.SetActive(true);
+            health1.gameObject.SetActive(true);
         }
 
     }
@@ -168,10 +173,10 @@ public class GameManager : MonoBehaviour
     }
     public void ExitGame()
     {
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
         EditorApplication.ExitPlaymode();
-        #else
+#else
         Application.Quit();
-        #endif
+#endif
     }
 }
