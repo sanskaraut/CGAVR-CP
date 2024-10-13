@@ -348,6 +348,7 @@
 "Assets/Scripts/BackGroundHit.cs"
 "Assets/Scripts/ButtonController.cs"
 "Assets/Scripts/GameManager.cs"
+"Assets/Scripts/MainManager.cs"
 "Assets/Scripts/PowerUp.cs"
 "Assets/Scripts/Target.cs"
 -langversion:9.0
