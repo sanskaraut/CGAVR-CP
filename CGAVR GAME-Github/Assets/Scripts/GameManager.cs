@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     public ParticleSystem healthParticle1;
     public ParticleSystem healthParticle2;
     public ParticleSystem healthParticle3;
+    public int gameDifficulty;
     // Start is called before the first frame update
     void Start()
     {
@@ -45,6 +46,33 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(spawnRate);
             int index = UnityEngine.Random.Range(0, target.Count);
             Instantiate(target[index]);
+            if (gameDifficulty == 1)
+            {
+                int descision = UnityEngine.Random.Range(0, 10);
+                if (descision == 4)
+                {
+                    int index1 = UnityEngine.Random.Range(0, target.Count);
+                    Instantiate(target[index1]);
+                }
+            }
+            if (gameDifficulty == 2)
+            {
+                int descision = UnityEngine.Random.Range(0, 4);
+                if (descision == 3)
+                {
+                    int index2 = UnityEngine.Random.Range(0, target.Count);
+                    Instantiate(target[index2]);
+                }
+            }
+            if (gameDifficulty == 3)
+            {
+                int descision = UnityEngine.Random.Range(0, 2);
+                if (descision == 0)
+                {
+                    int index3 = UnityEngine.Random.Range(0, target.Count);
+                    Instantiate(target[index3]);
+                }
+            }
         }
     }
     IEnumerator SpawnPowerUp()
@@ -53,7 +81,7 @@ public class GameManager : MonoBehaviour
         {
             yield return new WaitForSeconds(powerUpSpawnTime);
             int decisionSpawnPowerUp = UnityEngine.Random.Range(0, 11);
-            if (decisionSpawnPowerUp == 10 || decisionSpawnPowerUp == 7)
+            if ((decisionSpawnPowerUp == 10 || decisionSpawnPowerUp == 7) && health < 3)
             {
                 Debug.Log("PowerUp Spawned");
                 int index1 = UnityEngine.Random.Range(0, powerUp.Count);
@@ -120,8 +148,8 @@ public class GameManager : MonoBehaviour
         if (health < 3)
         {
             health++;
-        Debug.Log("Health Added");
-        UpdateIncreaseHealth();
+            Debug.Log("Health Added");
+            UpdateIncreaseHealth();
         }
     }
     private void UpdateDecreaseHealth()
@@ -178,5 +206,10 @@ public class GameManager : MonoBehaviour
 #else
         Application.Quit();
 #endif
+    }
+    public void ReduceScoreOnMissClick(int reduceScore)
+    {
+        UpdateScore(reduceScore);
+        Debug.Log("Score is reduced by " + reduceScore + " points on Miss-Click");
     }
 }

@@ -131,27 +131,27 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 3114}
     - Class: 114
-      Script: {instanceID: 3610}
+      Script: {instanceID: 3612}
     - Class: 114
-      Script: {instanceID: 4078}
+      Script: {instanceID: 4082}
     - Class: 114
-      Script: {instanceID: 4090}
+      Script: {instanceID: 4094}
     - Class: 114
-      Script: {instanceID: 4288}
+      Script: {instanceID: 4296}
     - Class: 114
-      Script: {instanceID: 4342}
+      Script: {instanceID: 4352}
     - Class: 114
-      Script: {instanceID: 5036}
+      Script: {instanceID: 5048}
     - Class: 114
-      Script: {instanceID: 5586}
+      Script: {instanceID: 5602}
     - Class: 114
-      Script: {instanceID: 5736}
+      Script: {instanceID: 5754}
     - Class: 114
-      Script: {instanceID: 6050}
+      Script: {instanceID: 6074}
     - Class: 114
-      Script: {instanceID: 6398}
+      Script: {instanceID: 6422}
     - Class: 114
-      Script: {instanceID: 7472}
+      Script: {instanceID: 7502}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -1078,5 +1078,4 @@ ScriptsOnlyBuild:
   platform: 20
   scenePathNames:
   - Assets/Scenes/Prototype 5.unity
-  playerPath: C:/Programming/GitHub/Unity/Jr_Programmer_Project/CGAVR-CP/CGAVR GAME-Github/WebGL
-    Builds
+  playerPath: C:/Programming/GitHub/Unity/Jr_Programmer_Project/CGAVR-CP-Build-2
