@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.IO;
-using TMPro;
 using UnityEngine;
 
 public class MainManager : MonoBehaviour
@@ -12,24 +9,7 @@ public class MainManager : MonoBehaviour
     public string bestPlayerName;
     public int bestPlayerScore;
     private GameManager gameManager;
-    // Start is called before the first frame update
-    // void Awake()
-    // {
-    //     if (Instance != null)
-    //     {
-    //         Destroy(gameObject);
-    //         return;
-    //     }
-    //     else
-    //     {
-    //         Instance = this;
-    //         DontDestroyOnLoad(gameObject);
-    //     }
-    //     // SaveBestPlayerName();
-    //     // SaveBestPlayerScore();
-    //     // LoadBestPlayerName();
-    //     // LoadBestPlayerScore();
-    // }
+    
     void Start()
     {
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();

@@ -3,78 +3,48 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
-using System;
 using UnityEditor;
+using System.Runtime.CompilerServices;
 public class GameManager : MonoBehaviour
 {
     public List<GameObject> target;
     public List<GameObject> powerUp;
+    private MainManager mainManager;
     public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI currentPlayerNameText;
+    public TextMeshProUGUI bestPlayerName_ScoreText;
     public GameObject titleScreen;
     public GameObject gameOverScreen;
     public GameObject inGameScreen;
-    private int health;
-    private float spawnRate;
-    public int powerUpSpawnTime;
-    public bool gameOver;
     public GameObject health1;
     public GameObject health2;
     public GameObject health3;
     public ParticleSystem healthParticle1;
     public ParticleSystem healthParticle2;
     public ParticleSystem healthParticle3;
+    private int health;
+    public int powerUpSpawnTime;
     public int gameDifficulty;
-    private MainManager mainManager;
-    public TextMeshProUGUI currentPlayerNameText;
-    public TextMeshProUGUI bestPlayerName_ScoreText;
-    public string currentPlayerName;
     public int currentPlayerScore;
+    public int bestPlayerScore;
     public string bestPlayerName;
-    public int bestPlayerScore = 0;
+    public string currentPlayerName;
+    public bool gameOver;
+    private float spawnRate;
     // Start is called before the first frame update
     void Start()
-{
-    // Ensure that mainManager is not null before using it
-    mainManager = GameObject.Find("Main Manager").GetComponent<MainManager>();
-    if (mainManager == null)
     {
-        Debug.LogError("MainManager is not found!");
-        return;  // Stop further execution to avoid null references
+        // Ensure that mainManager is not null before using it
+        mainManager = GameObject.Find("Main Manager").GetComponent<MainManager>();
+        if (mainManager == null)
+        {
+            Debug.LogError("MainManager is not found!");
+            return;  // Stop further execution to avoid null references
+        }
+
+        UpdateBestPlayerUI();
+        UpdateCurrentPlayerUI();
     }
-
-    mainManager.LoadBestPlayerData1();
-    bestPlayerName = mainManager.bestPlayerName;  // Assign best player name from MainManager
-    bestPlayerScore = mainManager.bestPlayerScore;  // Assign best player score from MainManager
-
-    // Ensure bestPlayerName_ScoreText is not null before trying to set it
-    if (bestPlayerName_ScoreText != null)
-    {
-        bestPlayerName_ScoreText.SetText(bestPlayerName + " :- " + bestPlayerScore);
-    }
-    else
-    {
-        Debug.LogError("bestPlayerName_ScoreText is not assigned in the Inspector!");
-    }
-
-    // Ensure currentPlayerNameText is not null before trying to set it
-    if (currentPlayerNameText != null)
-    {
-        currentPlayerNameText.SetText(currentPlayerName);
-    }
-    else
-    {
-        Debug.LogError("currentPlayerNameText is not assigned in the Inspector!");
-    }
-}
-
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     IEnumerator SpawnTarget()
     {
         while (gameOver == false)
@@ -126,7 +96,6 @@ public class GameManager : MonoBehaviour
         }
 
     }
-
     public void UpdateScore(int scoreToAdd)
     {
         currentPlayerScore += scoreToAdd;
@@ -134,34 +103,33 @@ public class GameManager : MonoBehaviour
 
     }
     public void GameOver()
-{
-    gameOver = true;
-    
-    // Ensure gameOverScreen is not null before activating it
-    if (gameOverScreen != null)
     {
-        gameOverScreen.SetActive(true);
-    }
-    else
-    {
-        Debug.LogError("gameOverScreen is not assigned in the Inspector!");
-    }
+        gameOver = true;
 
-    // Check and update best player score
-    if (currentPlayerScore > bestPlayerScore)
-    {
-        bestPlayerScore = currentPlayerScore;
-        bestPlayerName = currentPlayerName;
-        mainManager.SaveBestPlayerData1();  // Save the new best player data
-    }
+        // Ensure gameOverScreen is not null before activating it
+        if (gameOverScreen != null)
+        {
+            gameOverScreen.SetActive(true);
+        }
+        else
+        {
+            Debug.LogError("gameOverScreen is not assigned in the Inspector!");
+        }
 
-    // Ensure bestPlayerName_ScoreText is not null before updating it
-    if (bestPlayerName_ScoreText != null)
-    {
-        bestPlayerName_ScoreText.SetText(bestPlayerName + " :- " + bestPlayerScore);
-    }
-}
+        // Check and update best player score
+        if (currentPlayerScore > bestPlayerScore)
+        {
+            bestPlayerScore = currentPlayerScore;
+            bestPlayerName = currentPlayerName;
+            mainManager.SaveBestPlayerData1();  // Save the new best player data
+        }
 
+        // Ensure bestPlayerName_ScoreText is not null before updating it
+        if (bestPlayerName_ScoreText != null)
+        {
+            bestPlayerName_ScoreText.SetText(bestPlayerName + " :- " + bestPlayerScore);
+        }
+    }
     public void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -171,23 +139,12 @@ public class GameManager : MonoBehaviour
         powerUpSpawnTime = difficulty + 2;
         inGameScreen.gameObject.SetActive(true);
         titleScreen.gameObject.SetActive(false);
-        currentPlayerNameText.SetText(currentPlayerName);
-        bestPlayerName_ScoreText.SetText(bestPlayerName + " :- " + bestPlayerScore);
+        UpdateCurrentPlayerUI();
+        UpdateBestPlayerUI();
         gameOver = false;
         health = 3;
         currentPlayerScore = 0;
-        if (difficulty == 1)
-        {
-            spawnRate = 1;
-        }
-        else if (difficulty == 2)
-        {
-            spawnRate = 0.85f;
-        }
-        else if (difficulty == 3)
-        {
-            spawnRate = 0.7f;
-        }
+        SetSpawnRateWithDifficulty(difficulty);
         UpdateIncreaseHealth();
         UpdateScore(0);
         StartCoroutine(SpawnTarget());
@@ -276,5 +233,50 @@ public class GameManager : MonoBehaviour
     public void UpdateBestPlayerData()
     {
         mainManager.SaveBestPlayerData1();
+        Debug.Log("Best Player Score Updated");
+    }
+    private void UpdateBestPlayerUI()
+    {
+        mainManager.LoadBestPlayerData1();
+        bestPlayerName = mainManager.bestPlayerName;  // Assign best player name from MainManager
+        bestPlayerScore = mainManager.bestPlayerScore;  // Assign best player score from MainManager
+
+        // Ensure bestPlayerName_ScoreText is not null before trying to set it
+        if (bestPlayerName_ScoreText != null)
+        {
+            bestPlayerName_ScoreText.SetText(bestPlayerName + " :- " + bestPlayerScore);
+            Debug.Log("Score Updated");
+        }
+        else
+        {
+            Debug.LogError("bestPlayerName_ScoreText is not assigned in the Inspector!");
+        }
+    }
+    private void UpdateCurrentPlayerUI()
+    {
+        if (currentPlayerNameText != null)
+        {
+            currentPlayerNameText.SetText(currentPlayerName);
+        }
+        else
+        {
+            Debug.LogError("currentPlayerNameText is not assigned in the Inspector!");
+        }
+    }
+    private void SetSpawnRateWithDifficulty(int difficulty)
+    {
+        if (difficulty == 1)
+        {
+            spawnRate = 1;
+        }
+        else if (difficulty == 2)
+        {
+            spawnRate = 0.85f;
+        }
+        else if (difficulty == 3)
+        {
+            spawnRate = 0.7f;
+        }
     }
 }
+

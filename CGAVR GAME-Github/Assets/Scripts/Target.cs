@@ -15,6 +15,7 @@ public class Target : MonoBehaviour
     private GameManager gameManager;
     public int pointValue;
     public ParticleSystem explosionParticle;
+    private AudioSource audioSource;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +24,7 @@ public class Target : MonoBehaviour
         targetRb.AddForce(RandomForce(), ForceMode.Impulse);
         targetRb.AddTorque(RandomTorque(), RandomTorque(), RandomTorque(), ForceMode.Impulse);
         transform.position = RandomPos();
+        audioSource = GetComponent<AudioSource>();
     }
     Vector3 RandomForce()
     {
@@ -41,6 +43,7 @@ public class Target : MonoBehaviour
     {
         if (gameManager.gameOver == false)
         {
+
             Destroy(gameObject);
             Instantiate(explosionParticle, transform.position, explosionParticle.transform.rotation);
             gameManager.UpdateScore(pointValue);
@@ -48,7 +51,6 @@ public class Target : MonoBehaviour
             {
                 gameManager.ReduceHealth();
             }
-
         }
     }
     void OnTriggerEnter(Collider other)
