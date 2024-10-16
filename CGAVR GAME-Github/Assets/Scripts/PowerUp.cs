@@ -11,6 +11,8 @@ public class PowerUp : MonoBehaviour
     private int maxTorque = 6;
     private int xRange = 4;
     private float yRange = -2.5f;
+    public float mediumScaleX,mediumScaleY,mediumScaleZ;
+    public float hardScaleX,hardScaleY,hardScaleZ;
     public bool reduceHealth;
     private GameManager gameManager;
     public string powerUpCategory;
@@ -20,6 +22,7 @@ public class PowerUp : MonoBehaviour
     {
         targetRb = GetComponent<Rigidbody>();
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        ScaleTargetPrefabALongWithDifficulty(gameManager.gameDifficulty);
         targetRb.AddForce(RandomForce(), ForceMode.Impulse);
         targetRb.AddTorque(RandomTorque(), RandomTorque(), RandomTorque(), ForceMode.Impulse);
         transform.position = RandomPos();
@@ -54,6 +57,17 @@ public class PowerUp : MonoBehaviour
         if (other.CompareTag("Sensor"))
         {
             Destroy(gameObject);
+        }
+    }
+    void ScaleTargetPrefabALongWithDifficulty(int difficulty)
+    {
+        if (difficulty == 2)
+        {
+            gameObject.transform.localScale = new Vector3(mediumScaleX,mediumScaleY,mediumScaleZ);            
+        }
+        else if (difficulty == 3)
+        {
+            gameObject.transform.localScale = new Vector3(hardScaleX,hardScaleY,hardScaleZ);            
         }
     }
 }

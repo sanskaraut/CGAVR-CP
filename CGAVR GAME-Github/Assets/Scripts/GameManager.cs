@@ -19,6 +19,10 @@ public class GameManager : MonoBehaviour
     public GameObject health1;
     public GameObject health2;
     public GameObject health3;
+    public GameObject mainBackgroundScreen;
+    public GameObject easyBackgroundScreen;
+    public GameObject mediumBackgroundScreen;
+    public GameObject hardBackgroundScreen;
     public ParticleSystem healthParticle1;
     public ParticleSystem healthParticle2;
     public ParticleSystem healthParticle3;
@@ -144,6 +148,7 @@ public class GameManager : MonoBehaviour
         gameOver = false;
         health = 3;
         currentPlayerScore = 0;
+        mainBackgroundScreen.gameObject.SetActive(false);
         SetSpawnRateWithDifficulty(difficulty);
         UpdateIncreaseHealth();
         UpdateScore(0);
@@ -268,14 +273,17 @@ public class GameManager : MonoBehaviour
         if (difficulty == 1)
         {
             spawnRate = 1;
+            easyBackgroundScreen.gameObject.SetActive(true);
         }
         else if (difficulty == 2)
         {
             spawnRate = 0.85f;
+            mediumBackgroundScreen.gameObject.SetActive(true);
         }
         else if (difficulty == 3)
         {
             spawnRate = 0.7f;
+            hardBackgroundScreen.gameObject.SetActive(true);
         }
     }
 }

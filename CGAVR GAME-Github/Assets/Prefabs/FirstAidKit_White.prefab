@@ -146,6 +146,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6941963ed922f4e48ad097177d8dff45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mediumScaleX: 0.4
+  mediumScaleY: 0.4
+  mediumScaleZ: 0.4
+  hardScaleX: 0.3
+  hardScaleY: 0.3
+  hardScaleZ: 0.3
   reduceHealth: 0
   powerUpCategory: Health Kit
   explosionParticle: {fileID: 7535607469619513247, guid: ac10190cf200c4f7e881ca8e41d3d760, type: 3}

@@ -171,6 +171,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c955f58efb858d4aa80d4c150a88be7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mediumScaleX: 2.1
+  mediumScaleY: 2.1
+  mediumScaleZ: 2.1
+  hardScaleX: 1.9
+  hardScaleY: 1.9
+  hardScaleZ: 1.9
   reduceHealth: 1
   pointValue: -10
   explosionParticle: {fileID: 2088871590894813759, guid: 745208c9d6e104225bd99e1ab894e3bb, type: 3}
