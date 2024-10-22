@@ -53,7 +53,9 @@
           },
           {
             "name": "AudioClip",
-            "scenes": [],
+            "scenes": [
+              "Assets/Scenes/Prototype 5.unity"
+            ],
             "dependencyType": 0,
             "icon": null
           },
@@ -72,8 +74,18 @@
             "icon": null
           },
           {
+            "name": "AudioSource",
+            "scenes": [
+              "Assets/Scenes/Prototype 5.unity"
+            ],
+            "dependencyType": 0,
+            "icon": null
+          },
+          {
             "name": "SampleClip",
-            "scenes": [],
+            "scenes": [
+              "Assets/Scenes/Prototype 5.unity"
+            ],
             "dependencyType": 1,
             "icon": null
           }
@@ -481,6 +493,12 @@
             "icon": "package/com.unity.modules.physics"
           },
           {
+            "name": "Required by Physics2D Module",
+            "scenes": [],
+            "dependencyType": 2,
+            "icon": "package/com.unity.modules.physics2d"
+          },
+          {
             "name": "Required by RuntimeInitializeOnLoadManagerInitializer Module",
             "scenes": [],
             "dependencyType": 2,
@@ -608,6 +626,14 @@
             "icon": null
           },
           {
+            "name": "MeshCollider",
+            "scenes": [
+              "Assets/Scenes/Prototype 5.unity"
+            ],
+            "dependencyType": 0,
+            "icon": null
+          },
+          {
             "name": "PhysicsManager",
             "scenes": [],
             "dependencyType": 1,
@@ -618,6 +644,23 @@
             "scenes": [
               "Assets/Scenes/Prototype 5.unity"
             ],
+            "dependencyType": 0,
+            "icon": null
+          }
+        ]
+      },
+      {
+        "name": "Physics2D",
+        "dependencies": [
+          {
+            "name": "Physics2DSettings",
+            "scenes": [],
+            "dependencyType": 1,
+            "icon": null
+          },
+          {
+            "name": "Rigidbody2D",
+            "scenes": [],
             "dependencyType": 0,
             "icon": null
           }
@@ -684,6 +727,12 @@
             "scenes": [],
             "dependencyType": 2,
             "icon": "package/com.unity.modules.physics"
+          },
+          {
+            "name": "Required by Physics2D Module",
+            "scenes": [],
+            "dependencyType": 2,
+            "icon": "package/com.unity.modules.physics2d"
           },
           {
             "name": "Required by RuntimeInitializeOnLoadManagerInitializer Module",
