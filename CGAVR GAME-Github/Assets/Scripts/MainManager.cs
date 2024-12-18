@@ -19,7 +19,7 @@ public class MainManager : MonoBehaviour
         currentPlayerName = input;
         Debug.Log(currentPlayerName);
         gameManager.currentPlayerName = currentPlayerName;
-        // SaveBestPlayerName();
+
     }
     public void SaveBestPlayerData1()
     {

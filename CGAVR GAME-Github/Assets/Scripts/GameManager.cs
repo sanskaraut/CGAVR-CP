@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("Game Manager Started");
         // Ensure that mainManager is not null before using it
         mainManager = GameObject.Find("Main Manager").GetComponent<MainManager>();
         if (mainManager == null)
